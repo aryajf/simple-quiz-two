@@ -1,4 +1,4 @@
-# Simple Quiz Model 1 convert to Vite
+# Simple Quiz Model 2 convert to Vite
 
 ## Project setup
 ```
