@@ -392,7 +392,14 @@ hr {
  * https://github.com/tailwindcss/tailwindcss/issues/362
  */
 
-img {
+
+img{
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   border-style: solid;
 }
 
@@ -785,45 +792,137 @@ video {
 
 .splash-screen{
   height: 100vh;
-  background: #2a4675;
   position: relative;
   overflow: hidden;
-  #splash-character-1{
-      position: absolute;
-      right: -10rem;
-      top: 50%;
-      transform: translateY(-25%);
-      width: 600px;
-  }
-  #splash-character-2{
-      width: 600px;
-      bottom: -2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      position: absolute;
-  }
   .splash-screen-container{
       padding-bottom: 200px;
       position: relative;
   }
-  .start-button-container{
-      margin-top: 40px;
-  }
-  p{
-      font-size: larger;
-  }
-  .start-button{
-      cursor: pointer;
-      color: #1c1745;
-      font-size: 25px;
-      padding: 10px 40px;
-      border: 3px solid #1c1745;
-      letter-spacing: 2px;
-      background-color: #13c66a;
-      &:hover{
-        background-color: #00b75a;
+  .splash-screen-bottom{
+      padding-bottom: 20px;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      position: absolute;
+      span{
+        color: #1c1745;
+        font-size: 25px;
+        padding: 10px 40px;
+        border: 3px solid #1c1745;
+        letter-spacing: 2px;
+        background-color: #13c66a;
+        &:hover{
+          background-color: #00b75a;
+        }
       }
   }
+  .start-button-container{
+      margin-top: 40px;
+      .start-button{
+          cursor: pointer;
+          color: #fff;
+          font-size: 25px;
+          padding: 10px 40px;
+          letter-spacing: 2px;
+          background-color: #88644a;
+          &:hover{
+            background-color: #7c5940;
+          }
+      }
+  }
+  p{
+    font-size: larger;
+  }
+}
+.introduction{
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  margin-top: 40px;
+  .introduction-container{
+      position: relative;
+      width: 80%;
+      margin: 0 auto;
+      .introduction-text{
+          font-size: 25px;
+          padding: 50px 40px;
+          letter-spacing: 2px;
+          background-color: #ce7243;
+      }
+  }
+}
+
+.selecting{
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  margin-top: 40px;
+  .selecting-container{
+    position: relative;
+    margin: 0 auto;
+    .selecting-text{
+      cursor:pointer;
+      padding: 5px;
+      background-color: #ce7243;
+      img{
+        margin: 0 auto;
+        width: 50%;
+      }
+    }
+  }
+}
+
+.instruction{
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  margin-top: 40px;
+  .instruction-container{
+    position: relative;
+    margin: 0 auto;
+    .instruction-text{
+      padding: 20px;
+      background-color: #ce7243;
+      img{
+        margin: 0 auto;
+        width: 50%;
+      }
+    }
+  }
+}
+
+.arrow-right-container{
+  position: absolute;
+  right: 25px;
+}
+
+.arrow{
+  cursor: pointer;
+  position: relative;
+  width:120px;
+  background: #7f9938;
+  height:40px;
+  line-height: 40px;
+  margin-bottom:30px; 
+  text-align:center;
+  color:#fff;
+  &:hover{
+    background: #748d31;
+  }
+  &:hover:after{
+    border-left: 20px solid #748d31;
+  }
+}
+
+.arrow-right:after{
+  content: "";
+  position: absolute;
+  transform: scale(1.5,1.5);
+  right: -20px;
+  top: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid #7f9938;
 }
 
 @-webkit-keyframes spin {
@@ -892,15 +991,14 @@ video {
   }
 }
 
-@media (max-width: 640px) {
-  .splash-screen{
-    #splash-character-1{
-        width: 400px;
+@media (max-width: 768px) {
+  .introduction{
+    .introduction-container{
+        .introduction-text{
+            font-size: 20px;
+        }
     }
-    #splash-character-2{
-        width: 400px;
-    }
-  }
+  }  
 }
 
 @media (min-width: 768px) {

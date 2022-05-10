@@ -1,0 +1,10 @@
+node_modules
+.vscode
+.DS_Store
+dist
+dist.zip
+simple-quiz-two
+simple-quiz-two.zip
+dist-ssr
+*.local
+.package-lock.json
