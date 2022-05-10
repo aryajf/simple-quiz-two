@@ -8,27 +8,81 @@
             <source src="@/assets/audios/dissapointed.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-        <img src="@/assets/images/confetti.png" v-if="finish" class="background-win" alt="" srcset="">
-        <div id="app" class="flex w-full h-100 justify-center items-center">
-            <div class="w-full max-w-xl p-3"  style="z-index:2 !important;">
-            <div class="p-12 w-full mb-8">
-                <div v-if="!finish" id="timer-bar">
-                    <div id="bar" :style="{width:timer+'%'}"></div>
-                </div>
-                <div v-if="idx < count">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-6">
-                            <img :src="questions[idx]['questionImage']" alt="">
+        <!-- <img src="@/assets/images/confetti.png" v-if="finish" class="background-win" alt="" srcset=""> -->
+        <div id="app" class="w-full h-100">
+            <div class="flex justify-center items-center">
+                <div class="w-full max-w-xl p-3" style="z-index:2 !important;">
+                    <div class="p-6 w-full mb-8">
+                        <div v-if="!finish" id="timer-bar">
+                            <div id="bar" :style="{width:timer+'%'}"></div>
+                        </div>
+                        <div v-if="idx < count">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-6 d-flex justify-content-center">
+                                    <img class="quiz-image-question" :src="questions[idx]['questionImage']" alt="">
+                                </div>
+                            </div>
+                            <p class="bg-main p-2 text-center mt-3 font-bold">{{questions[idx]['question']}}</p>
+                            <div class="row">
+                                <div class="col-6 quiz-image-mobile" v-for="(answer, index) in questions[idx].answers"
+                                    :key="index"
+                                    :for="index">
+                                    <label
+                                    class="block mt-4 border border-gray-300 rounded-full p-6 text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
+                                    >
+                                        <input
+                                        :id="index"
+                                        type="radio"
+                                        class="hidden"
+                                        :value="index"
+                                        @change="answered($event)"
+                                        :disabled="selectedAnswer != ''"
+                                        />
+                                        <img class="w-50" style="height:80px" :src="answer" alt="" srcset="">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <div class="row mt-6 flex justify-content-center align-items-center">
+                                <div class="col-6">
+                                    <div
+                                    class="result font-bold text-center rounded p-3 text-lg">
+                                        <div v-if="correctAnswers == 5">Selamat kamu mendapatkan 5 tepung</div>
+                                        <div v-else>Sayang sekali, kamu hanya mendapatkan {{ correctAnswers }} tepung</div>
+                                        <div class="row d-flex justify-content-center mt-3">
+                                            <div v-for="i in correctAnswers" v-bind:key="i" class="col">
+                                                <img class="w-100" src="@/assets/images/unknown.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <img id="char-status" :src="charStatus" alt="">
+                                </div>
+                                <button
+                                @click="resetQuiz"
+                                class="reset-button w-75 block mt-4 font-bold text-center rounded-lg py-3 px-6 text-lg" :class="{'bg-green-600' : correctAnswers == 5}, {'bg-red-600' : correctAnswers < 5}"
+                                >
+                                <template v-if="correctAnswers == 5">
+                                    FINISH
+                                </template>
+                                <template v-else>
+                                    PLAY AGAIN
+                                </template>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <p class="text-center mt-3 text-2xl font-bold">{{questions[idx]['question']}}</p>
+                </div>
+                </div>
+                <div v-if="idx < count" class="quiz-image-desktop container-fluid">
                     <div class="row">
-                        <div class="col-6" v-for="(answer, index) in questions[idx].answers"
+                        <div class="col-3 select-quiz" v-for="(answer, index) in questions[idx].answers"
                             :key="index"
                             :for="index">
                             <label
-                            class="block mt-4 font-bold text-center rounded-lg py-4 px-6 text-lg"
-                            :class="{'hover:bg-green-700 cursor-pointer' : answer == 'True' && selectedAnswer == ''}, {'hover:bg-red-700 cursor-pointer' : answer == 'False' && selectedAnswer == ''}, {'bg-green-600' : answer == 'True'}, {'bg-red-600' : answer == 'False'}"
+                            class="block mt-4 rounded-lg py-2 px-6 text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
                             >
                                 <input
                                 :id="index"
@@ -38,40 +92,11 @@
                                 @change="answered($event)"
                                 :disabled="selectedAnswer != ''"
                                 />
-                                {{ answer }}
+                                <img class="w-50" style="height:125px" :src="answer" alt="" srcset="">
                             </label>
                         </div>
                     </div>
                 </div>
-                <div v-else>
-                    <h1 class="font-bold text-center text-3xl">SKOR AKHIR</h1>
-                    <div class="flex justify-content-center mt-6">
-                        <label
-                        class="result block mt-4 font-bold text-center rounded-lg py-3 w-75 px-6 text-lg"
-                        :class="{'bg-green-600' : correctAnswers == 100}, {'bg-red-600' : correctAnswers < 100}"
-                        >
-                        <img id="char-status-1" :src="charStatus1" alt="">
-                        <img id="char-status-2" :src="charStatus2" alt="">
-                            {{ correctAnswers }}
-                        </label>
-                    </div>
-                    <div class="mt-6 flex justify-content-center">
-                        <button
-                        @click="resetQuiz"
-                        class="reset-button w-75 block mt-4 font-bold text-center rounded-lg py-3 px-6 text-lg"
-                        :class="{'bg-red-600' : correctAnswers == 100}, {'bg-green-600' : correctAnswers < 100}"
-                        >
-                        <template v-if="correctAnswers == 100">
-                            FINISH
-                        </template>
-                        <template v-else>
-                            PLAY AGAIN
-                        </template>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            </div>
         </div>
     </div>
 </template>
@@ -90,48 +115,45 @@
             questions: [
             {
                 type: "image-text",
-                questionImage: new URL('../../assets/images/quiz/No1-Australia.png', import.meta.url).href,
-                question: 'Ibu kota dari negara Australia adalah Sydney.',
-                answers: { a: "True", b: "False" },
+                questionImage: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href,
+                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
+                answers: { a: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href },
+                correctAnswer: "c",
+            },
+            {
+                type: "image-text",
+                questionImage: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href,
+                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
+                answers: { a: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href },
+                correctAnswer: "d",
+            },
+            {
+                type: "image-text",
+                questionImage: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href,
+                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
+                answers: { a: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-2.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href },
                 correctAnswer: "b",
             },
             {
                 type: "image-text",
-                questionImage: new URL('../../assets/images/quiz/No2-Bhinneka.png', import.meta.url).href,
-                question: 'Bhinneka Tunggal Ika merupakan lambang negara RI.',
-                answers: { a: "True", b: "False" },
+                questionImage: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href,
+                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
+                answers: { a: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href },
                 correctAnswer: "a",
             },
             {
                 type: "image-text",
-                questionImage: new URL('../../assets/images/quiz/No3-Yuan.png', import.meta.url).href,
-                question: 'Yuan adalah mata uang negara Jepang.',
-                answers: { a: "True", b: "False" },
-                correctAnswer: "b",
-            },
-            {
-                type: "image-text",
-                questionImage: new URL('../../assets/images/quiz/No4-Habibie.png', import.meta.url).href,
-                question: 'BJ. Habibie merupakan Presiden ke-3 RI.',
-                answers: { a: "True", b: "False" },
-                correctAnswer: "a",
-            },
-            {
-                type: "image-text",
-                questionImage: new URL('../../assets/images/quiz/No5-Sungai.png', import.meta.url).href,
-                question: 'Sungai terpanjang didunia adalah sungai Amazon.',
-                answers: { a: "True", b: "False" },
+                questionImage: new URL('../../assets/images/image-quiz/slice-egg-2.png', import.meta.url).href,
+                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
+                answers: { a: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-egg-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href },
                 correctAnswer: "b",
             },
             ],
         }
         },
         computed: {
-            charStatus1(){
-                return this.correctAnswers < 100 ? new URL('../../assets/images/characters/1.png', import.meta.url).href : new URL('../../assets/images/characters/3.png', import.meta.url).href
-            },
-            charStatus2(){
-                return this.correctAnswers < 100 ? new URL('../../assets/images/characters/2.png', import.meta.url).href : new URL('../../assets/images/characters/4.png', import.meta.url).href
+            charStatus(){
+                return this.correctAnswers < 5 ? new URL('../../assets/images/characters/defeated.png', import.meta.url).href : new URL('../../assets/images/characters/win.png', import.meta.url).href
             },
         },
         mounted(){
@@ -141,7 +163,7 @@
             this.wrongAnswers = 0
             this.finish = false
             this.timer = 100
-            this.setTimer()
+            // this.setTimer()
         },
         methods: {
         setTimer(){
@@ -162,9 +184,9 @@
                 this.selectedAnswer = e.target.value
             }
             if (this.selectedAnswer == this.questions[this.idx].correctAnswer) {
-                this.correctAnswers += 20
+                this.correctAnswers += 1
             } else {
-                this.wrongAnswers += 20
+                this.wrongAnswers += 1
             }
 
             this.idx++
