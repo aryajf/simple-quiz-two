@@ -163,7 +163,7 @@
             this.wrongAnswers = 0
             this.finish = false
             this.timer = 100
-            // this.setTimer()
+            this.setTimer()
         },
         methods: {
         setTimer(){
