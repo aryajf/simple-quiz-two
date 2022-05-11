@@ -12,8 +12,8 @@ export default defineConfig({
         VitePWA({
         registerType: 'autoUpdate',  
         manifest: {
-            "name":"Did U Know",
-            "short_name":"Did U Know",
+            "name":"Bakery Shop",
+            "short_name":"Bakery Shop",
             "theme_color":"#f4c2a1",
             "icons":[
             {"src":"./img/icons/android-chrome-192x192.png", "sizes":"192x192","type":"image/png"},

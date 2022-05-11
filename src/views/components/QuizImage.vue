@@ -196,7 +196,7 @@
             if(this.idx == this.count){
                 window.clearInterval(window.timer)
                 this.finish = true
-                if(this.correctAnswers < 100){
+                if(this.correctAnswers < 5){
                     document.getElementById("dissapointed").play()
                 }else{
                     document.getElementById("wow").play()
