@@ -45,7 +45,10 @@
                         </div>
                         <div v-else>
                             <div class="row mt-6 flex justify-content-center align-items-center">
-                                <div class="col-6">
+                                <div class="col-md-6">
+                                    <img id="char-status" :src="charStatus" alt="">
+                                </div>
+                                <div class="col-md-6 order-md-first">
                                     <div
                                     class="result font-bold text-center rounded p-3 text-lg">
                                         <div v-if="correctAnswers == 4">Selamat kamu mendapatkan 4 tepung</div>
@@ -56,9 +59,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <img id="char-status" :src="charStatus" alt="">
                                 </div>
                                 <button
                                 @click="resetQuiz"

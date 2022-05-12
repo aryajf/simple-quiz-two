@@ -1203,7 +1203,8 @@ video {
     padding: 40px 40px 200px 40px;
     .introduction-container{
       .introduction-text{
-            font-size: 20px;
+            font-size: inherit;
+            padding: 20px;
         }
     }
   }
