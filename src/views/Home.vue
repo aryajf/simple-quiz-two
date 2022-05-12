@@ -1,9 +1,15 @@
 <template>
-  <div>
+  <div id="home">
+    <img src="@/assets/images/dinding.png" class="background" alt="" srcset="">
     <splash-screen v-if="gameStatus == 'start'" />
     <selecting-game v-if="gameStatus == 'selecting'" />
-    <quiz-image v-if="gameStatus == 'onGame' && selectedGame == 'image'" />
-    <quiz-math v-if="gameStatus == 'onGame' && selectedGame == 'math'" />
+    <Transition name="fade">
+      <quiz-image v-if="gameStatus == 'onGame' && selectedGame == 'image'" />
+    </Transition>
+    <Transition name="fade">
+      <quiz-math v-if="gameStatus == 'onGame' && selectedGame == 'math'" />
+    </Transition>
+    <win v-if="gameStatus == 'win'" />
   </div>
 </template>
 
@@ -14,6 +20,7 @@
   import QuizMath from '@/views/components/QuizMath.vue'
   import SplashScreen from '@/views/components/SplashScreen.vue';
   import SelectingGame from '@/views/components/SelectingGame.vue';
+  import Win from '@/views/components/Win.vue';
   const gameStatus = computed(() => store.getters["gameStatus"]);
   const selectedGame = computed(() => store.getters["selectedGame"]);
 </script>

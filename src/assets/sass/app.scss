@@ -47,6 +47,29 @@ body {
   font-family: 'Poppins', sans-serif !important;
 }
 
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 #app{
   background-color: #fff3e3;
   height: 100vh;
@@ -593,6 +616,10 @@ video {
   border-color: rgba(209, 213, 219, var(--tw-border-opacity));
 }
 
+.rounded-6 {
+  border-radius: 20px;
+}
+
 .rounded-lg {
   border-radius: 0.5rem;
 }
@@ -781,12 +808,47 @@ video {
   width: 100%;
 }
 
+.background{
+  height: 100vh;
+  object-fit: cover;
+  width: 100%;
+  position: fixed;
+}
 .background-win{
   height: 100vh;
   object-fit: cover;
   width: 100%;
+  position: fixed;
+}
+.pot-top-left{
+  top: -150px;
+  left: -100px;
+  width: 500px;
+  object-fit: cover;
   position: absolute;
 }
+.pot-top-right{
+  top: -150px;
+  right: -100px;
+  width: 500px;
+  object-fit: cover;
+  position: absolute;
+}
+.pot-bottom-left{
+  bottom: -150px;
+  left: -100px;
+  width: 500px;
+  object-fit: cover;
+  position: absolute;
+}
+.pot-bottom-right{
+  bottom: -150px;
+  right: -100px;
+  width: 500px;
+  object-fit: cover;
+  position: absolute;
+}
+
 .result{
   font-weight: bolder;
   background-color: #ce7243;
@@ -797,11 +859,11 @@ video {
   content: "";
   position: absolute;
   transform: scale(1,1);
-  right: -20px;
-  bottom: 40px;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 20px solid #ce7243;
+  right: -30px;
+  bottom: 80px;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 40px solid #ce7243;
 }
 
 .reset-button{
@@ -823,14 +885,14 @@ video {
       width: 100%;
       position: absolute;
       span{
-        color: #1c1745;
+        color: #000;
         font-size: 25px;
         padding: 10px 40px;
-        border: 3px solid #1c1745;
+        border: 3px solid #000;
         letter-spacing: 2px;
-        background-color: #13c66a;
+        background-color: #d4504c;
         &:hover{
-          background-color: #00b75a;
+          background-color: #c94440;
         }
       }
   }
@@ -881,12 +943,18 @@ video {
     position: relative;
     margin: 0 auto;
     .selecting-text{
+      position: relative;
       cursor:pointer;
       padding: 5px;
       background-color: #ce7243;
       img{
         margin: 0 auto;
         width: 50%;
+      }
+      img.checked{
+        position: absolute;
+        left: 50%;
+        top: 0;
       }
     }
   }
@@ -908,6 +976,65 @@ video {
         margin: 0 auto;
         width: 50%;
       }
+    }
+  }
+}
+
+.win{
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0 0 0 0;
+  .win-container{
+    position: relative;
+  }
+  .win-image{
+    width: 100%;
+    margin-top: -100px;
+  }
+  .win-text{
+    font-size: 25px;
+    margin-top: -100px;
+    padding: 20px;
+    letter-spacing: 2px;
+    background-color: #ce7243;
+  }
+  .finish-button-container{
+      margin-top: 40px;
+      .finish-button{
+          cursor: pointer;
+          color: #fff;
+          font-size: 25px;
+          padding: 10px 40px;
+          letter-spacing: 2px;
+          background-color: #88644a;
+          &:hover{
+            background-color: #7c5940;
+          }
+      }
+  }
+  p{
+    font-size: larger;
+  }
+}
+
+
+.win-bottom{
+  padding-bottom: 20px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  span{
+    color: #000;
+    font-size: 25px;
+    padding: 10px 40px;
+    border: 3px solid #000;
+    letter-spacing: 2px;
+    background-color: #d4504c;
+    &:hover{
+      background-color: #c94440;
     }
   }
 }
@@ -950,19 +1077,32 @@ video {
   width: 50%;
 }
 
+.quiz-image-math{
+  width: 100%;
+}
+
 .quiz-image-desktop{
   position: fixed;
   z-index: 2;
   width: 100%;
   bottom: 0;
-  .select-quiz{
-    background-color: #ce7243;
-    border: 1px solid #000 !important;
+  label{
+    color: white;
+    font-size: 40px;
   }
+}
+
+.select-quiz{
+  background-color: #ce7243;
+  border: 1px solid #000;
 }
 
 .quiz-image-mobile{
   display: none;
+  label{
+    color: white;
+    font-size: 30px;
+  }
   input{
     height: 100px;
   }
@@ -1035,6 +1175,30 @@ video {
 }
 
 @media (max-width: 768px) {
+  .select-quiz{
+    background-color: #ce7243;
+    border: 0 solid transparent;
+  }
+  .pot-top-left{
+    top: -30px;
+    left: -20px;
+    width: 120px;
+  }
+  .pot-top-right{
+    top: -30px;
+    right: -20px;
+    width: 120px;
+  }
+  .pot-bottom-left{
+    bottom: -30px;
+    left: -20px;
+    width: 120px;
+  }
+  .pot-bottom-right{
+    bottom: -30px;
+    right: -20px;
+    width: 120px;
+  }
   .introduction{
     padding: 40px 40px 200px 40px;
     .introduction-container{
@@ -1052,11 +1216,33 @@ video {
   .quiz-image-question{
     width: 25%;
   }
+  .quiz-image-math{
+    width: 50%;
+  }
   .quiz-image-desktop{
     display: none;
+    label{
+      color: white;
+      font-size: 30px;
+    }
   }
   .quiz-image-mobile{
     display: block;
+  }
+  .result:after{
+    content: "";
+    position: absolute;
+    transform: scale(1,1), translateX(-50%);
+    top: -50px;
+    left: 42.5%;
+    width: 0;
+	  height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid #ce7243;
+  }
+  .win{
+    padding: 0 0 200px 0;
   }
 }
 

@@ -18,8 +18,8 @@
                         </div>
                         <div v-if="idx < count">
                             <div class="row d-flex justify-content-center">
-                                <div class="col-md-6 d-flex justify-content-center">
-                                    <img class="quiz-image-question" :src="questions[idx]['questionImage']" alt="">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <img class="quiz-math-question" :src="questions[idx]['questionImage']" alt="">
                                 </div>
                             </div>
                             <p class="bg-main p-2 text-center mt-3 font-bold">{{questions[idx]['question']}}</p>
@@ -28,7 +28,7 @@
                                     :key="index"
                                     :for="index">
                                     <label
-                                    class="block mt-4 border border-gray-300 rounded-full p-6 text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
+                                    class="select-quiz font-bold block mt-4 rounded-full p-6 text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
                                     >
                                         <input
                                         :id="index"
@@ -38,7 +38,7 @@
                                         @change="answered($event)"
                                         :disabled="selectedAnswer != ''"
                                         />
-                                        <img class="w-50" style="height:80px" :src="answer" alt="" srcset="">
+                                        {{ answer }}
                                     </label>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                 <div class="col-6">
                                     <div
                                     class="result font-bold text-center rounded p-3 text-lg">
-                                        <div v-if="correctAnswers == 5">Selamat kamu mendapatkan 5 tepung</div>
+                                        <div v-if="correctAnswers == 4">Selamat kamu mendapatkan 4 tepung</div>
                                         <div v-else>Sayang sekali, kamu hanya mendapatkan {{ correctAnswers }} tepung</div>
                                         <div class="row d-flex justify-content-center mt-3">
                                             <div v-for="i in correctAnswers" v-bind:key="i" class="col">
@@ -62,9 +62,9 @@
                                 </div>
                                 <button
                                 @click="resetQuiz"
-                                class="reset-button w-75 block mt-4 font-bold text-center rounded-lg py-3 px-6 text-lg" :class="{'bg-green-600' : correctAnswers == 5}, {'bg-red-600' : correctAnswers < 5}"
+                                class="reset-button w-75 block mt-4 font-bold text-center rounded-lg py-3 px-6 text-lg" :class="{'bg-green-600' : correctAnswers == 4}, {'bg-red-600' : correctAnswers < 4}"
                                 >
-                                <template v-if="correctAnswers == 5">
+                                <template v-if="correctAnswers == 4">
                                     FINISH
                                 </template>
                                 <template v-else>
@@ -82,7 +82,7 @@
                             :key="index"
                             :for="index">
                             <label
-                            class="block mt-4 rounded-lg py-2 px-6 text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
+                            class="block font-bold mt-4 rounded-lg py-4 px-6 text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
                             >
                                 <input
                                 :id="index"
@@ -92,7 +92,7 @@
                                 @change="answered($event)"
                                 :disabled="selectedAnswer != ''"
                                 />
-                                <img class="w-50" style="height:125px" :src="answer" alt="" srcset="">
+                                {{ answer }}
                             </label>
                         </div>
                     </div>
@@ -109,51 +109,44 @@
             selectedAnswer: "",
             correctAnswers: 0,
             wrongAnswers: 0,
-            count: 5,
+            count: 4,
             timer: 100,
             finish: false,
             questions: [
             {
                 type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href,
-                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href },
-                correctAnswer: "c",
-            },
-            {
-                type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href,
-                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href },
-                correctAnswer: "d",
-            },
-            {
-                type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href,
-                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-2.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href },
-                correctAnswer: "b",
-            },
-            {
-                type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href,
-                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href },
+                questionImage: new URL('../../assets/images/math-quiz/cake.png', import.meta.url).href,
+                question: 'Berapa total kue diatas ?',
+                answers: { a: 3, b: 5, c: 1, d: 2 },
                 correctAnswer: "a",
             },
             {
                 type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/slice-egg-2.png', import.meta.url).href,
-                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-egg-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href },
+                questionImage: new URL('../../assets/images/math-quiz/cupcake.png', import.meta.url).href,
+                question: 'Berapa total cupcake diatas ?',
+                answers: { a: 2, b: 4, c: 5, d: 6 },
                 correctAnswer: "b",
+            },
+            {
+                type: "image-text",
+                questionImage: new URL('../../assets/images/math-quiz/ice-cream.png', import.meta.url).href,
+                question: 'Berapa total ice cream diatas ?',
+                answers: { a: 6, b: 8, c: 3, d: 5 },
+                correctAnswer: "a",
+            },
+            {
+                type: "image-text",
+                questionImage: new URL('../../assets/images/math-quiz/donut.png', import.meta.url).href,
+                question: 'Berapa total donat diatas ?',
+                answers: { a: 1, b: 2, c: 4, d: 5 },
+                correctAnswer: "c",
             },
             ],
         }
         },
         computed: {
             charStatus(){
-                return this.correctAnswers < 5 ? new URL('../../assets/images/characters/defeated.png', import.meta.url).href : new URL('../../assets/images/characters/win.png', import.meta.url).href
+                return this.correctAnswers < 4 ? new URL('../../assets/images/characters/defeated.png', import.meta.url).href : new URL('../../assets/images/characters/win.png', import.meta.url).href
             },
         },
         mounted(){
@@ -196,7 +189,7 @@
             if(this.idx == this.count){
                 window.clearInterval(window.timer)
                 this.finish = true
-                if(this.correctAnswers < 5){
+                if(this.correctAnswers < 4){
                     document.getElementById("dissapointed").play()
                 }else{
                     document.getElementById("wow").play()
@@ -204,7 +197,11 @@
             }
         },
         resetQuiz() {
-            this.$store.dispatch('restartGame')
+            let status = false
+            if(this.correctAnswers >= 4){
+                status = true
+            }
+            this.$store.dispatch('restartGame',{type:'math', status})
         },
         },
     }

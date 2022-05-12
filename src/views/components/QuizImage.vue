@@ -12,7 +12,7 @@
         <div id="app" class="w-full h-100">
             <div class="flex justify-center items-center">
                 <div class="w-full max-w-xl p-3" style="z-index:2 !important;">
-                    <div class="p-6 w-full mb-8">
+                    <div class="p-4 w-full mb-8">
                         <div v-if="!finish" id="timer-bar">
                             <div id="bar" :style="{width:timer+'%'}"></div>
                         </div>
@@ -28,7 +28,7 @@
                                     :key="index"
                                     :for="index">
                                     <label
-                                    class="block mt-4 border border-gray-300 rounded-full p-6 text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
+                                    class="select-quiz block mt-4 rounded-full p-6 text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
                                     >
                                         <input
                                         :id="index"
@@ -45,31 +45,33 @@
                         </div>
                         <div v-else>
                             <div class="row mt-6 flex justify-content-center align-items-center">
-                                <div class="col-6">
+                                <div class="col-md-6">
+                                    <img id="char-status" :src="charStatus" alt="">
+                                </div>
+                                <div class="col-md-6 order-md-first">
                                     <div
                                     class="result font-bold text-center rounded p-3 text-lg">
                                         <div v-if="correctAnswers == 5">Selamat kamu mendapatkan 5 tepung</div>
                                         <div v-else>Sayang sekali, kamu hanya mendapatkan {{ correctAnswers }} tepung</div>
                                         <div class="row d-flex justify-content-center mt-3">
-                                            <div v-for="i in correctAnswers" v-bind:key="i" class="col">
+                                            <div v-for="i in correctAnswers" v-bind:key="i" class="col-4 mb-2">
                                                 <img class="w-100" src="@/assets/images/unknown.png" alt="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <img id="char-status" :src="charStatus" alt="">
-                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
                                 <button
                                 @click="resetQuiz"
                                 class="reset-button w-75 block mt-4 font-bold text-center rounded-lg py-3 px-6 text-lg" :class="{'bg-green-600' : correctAnswers == 5}, {'bg-red-600' : correctAnswers < 5}"
                                 >
-                                <template v-if="correctAnswers == 5">
-                                    FINISH
-                                </template>
-                                <template v-else>
-                                    PLAY AGAIN
-                                </template>
+                                    <template v-if="correctAnswers == 5">
+                                        FINISH
+                                    </template>
+                                    <template v-else>
+                                        PLAY AGAIN
+                                    </template>
                                 </button>
                             </div>
                         </div>
@@ -204,7 +206,11 @@
             }
         },
         resetQuiz() {
-            this.$store.dispatch('restartGame')
+            let status = false
+            if(this.correctAnswers >= 5){
+                status = true
+            }
+            this.$store.dispatch('restartGame',{type:'image', status})
         },
         },
     }
