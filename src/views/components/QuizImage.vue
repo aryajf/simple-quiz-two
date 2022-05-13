@@ -38,7 +38,7 @@
                                         @change="answered($event)"
                                         :disabled="selectedAnswer != ''"
                                         />
-                                        <img class="w-50" style="height:80px" :src="answer" alt="" srcset="">
+                                        <img class="w-75" :src="answer" alt="" srcset="">
                                     </label>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                         <div v-else>Sayang sekali, kamu hanya mendapatkan {{ correctAnswers }} tepung</div>
                                         <div class="row d-flex justify-content-center mt-3">
                                             <div v-for="i in correctAnswers" v-bind:key="i" class="col-4 mb-2">
-                                                <img class="w-100" src="@/assets/images/unknown.png" alt="">
+                                                <img class="w-100" src="@/assets/images/tepung.png" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -84,7 +84,7 @@
                             :key="index"
                             :for="index">
                             <label
-                            class="block mt-4 rounded-lg py-2 px-6 text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
+                            class="block rounded-lg text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
                             >
                                 <input
                                 :id="index"
@@ -94,7 +94,7 @@
                                 @change="answered($event)"
                                 :disabled="selectedAnswer != ''"
                                 />
-                                <img class="w-50" style="height:125px" :src="answer" alt="" srcset="">
+                                <img class="w-75" :src="answer" alt="" srcset="">
                             </label>
                         </div>
                     </div>
@@ -117,37 +117,37 @@
             questions: [
             {
                 type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href,
+                questionImage: new URL('../../assets/images/image-quiz/1-1.png', import.meta.url).href,
                 question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href },
+                answers: { a: new URL('../../assets/images/image-quiz/5.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/6.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/1-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/7.png', import.meta.url).href },
                 correctAnswer: "c",
             },
             {
                 type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href,
+                questionImage: new URL('../../assets/images/image-quiz/2-2.png', import.meta.url).href,
                 question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href },
+                answers: { a: new URL('../../assets/images/image-quiz/8.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/9.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/10.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/2-1.png', import.meta.url).href },
                 correctAnswer: "d",
             },
             {
                 type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href,
+                questionImage: new URL('../../assets/images/image-quiz/3-1.png', import.meta.url).href,
                 question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-2.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href },
+                answers: { a: new URL('../../assets/images/image-quiz/2-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/3-2.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/11.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/12.png', import.meta.url).href },
                 correctAnswer: "b",
             },
             {
                 type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href,
+                questionImage: new URL('../../assets/images/image-quiz/4-2.png', import.meta.url).href,
                 question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/slice-cake-2.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href },
+                answers: { a: new URL('../../assets/images/image-quiz/4-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/1-2.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/14.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/13.png', import.meta.url).href },
                 correctAnswer: "a",
             },
             {
                 type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/slice-egg-2.png', import.meta.url).href,
+                questionImage: new URL('../../assets/images/image-quiz/2-1.png', import.meta.url).href,
                 question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/slice-cake-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/slice-egg-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/slice-egg-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/slice-bread-1.png', import.meta.url).href },
+                answers: { a: new URL('../../assets/images/image-quiz/14.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/2-2.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/3-1.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/6.png', import.meta.url).href },
                 correctAnswer: "b",
             },
             ],

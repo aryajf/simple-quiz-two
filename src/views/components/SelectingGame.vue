@@ -10,14 +10,14 @@
                     <div class="col-md-4 mb-3">
                         <div @click="(clear.math == false) ? menu = 'instruction-math' : menu = 'selecting'" class="selecting-text rounded-3 text-center">
                             <img v-if="clear.math == true" src="@/assets/images/check.png" class="checked" alt="" srcset="">
-                            <img src="@/assets/images/unknown.png" alt="" srcset="">
+                            <img src="@/assets/images/menu/math.png" alt="" srcset="">
                         </div>
                         <h4 class="font-bold text-center mt-2">Berhitung</h4>
                     </div>
                     <div class="col-md-4">
                         <div @click="(clear.image == false) ? menu = 'instruction-image' : menu = 'selecting'" class="selecting-text rounded-3 text-center">
                             <img v-if="clear.image == true" src="@/assets/images/check.png" class="checked" alt="" srcset="">
-                            <img src="@/assets/images/unknown.png" alt="" srcset="">
+                            <img src="@/assets/images/menu/image.png" alt="" srcset="">
                         </div>
                         <h4 class="font-bold text-center mt-2">Lengkapi Gambar</h4>
                     </div>

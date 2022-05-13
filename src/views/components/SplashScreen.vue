@@ -14,7 +14,7 @@
                 <div class="mb-3 introduction-container">
                     <div class="introduction-text rounded-3 font-bold text-center">
                         <div>Selamat Datang</div>
-                        <div>Perkenalkan nama ku Mr.James. Hari ini aku akan membagikan 100 kue gratis untuk merayakan ulang tahun toko kue ku yang ke 30</div>
+                        <div>Perkenalkan nama ku Mr. James.<br>Hari ini aku akan membagikan 100 kue gratis untuk merayakan ulang tahun toko kue ku yang ke 30</div>
                     </div>
                     <div class="arrow-right-container">
                         <div href="#" class="mt-3 arrow arrow-right" @click="menu = 'introduction-2'"></div>
@@ -24,7 +24,7 @@
             <div class="introduction container" v-if="menu == 'introduction-2'">
                 <div class="mb-3 introduction-container">
                     <div class="introduction-text rounded-3 font-bold text-center">
-                        <div>Tapi aku kekurangan beberapa bahan untuk membuat 100 kue. Aku butuh bantuan kalian untuk menyelesaikan misi dan mendapatkan tepung sebanyak - banyaknya</div>
+                        <div>Tapi aku kekurangan beberapa bahan untuk membuat 100 kue.<br>Aku butuh bantuan kalian untuk menyelesaikan misi dan mendapatkan tepung sebanyak - banyaknya</div>
                     </div>
                     <div class="arrow-right-container">
                         <div href="#" class="mt-3 arrow arrow-right" @click="selectingGame"></div>

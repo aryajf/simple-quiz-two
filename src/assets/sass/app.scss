@@ -992,7 +992,7 @@ video {
   .win-image{
     width: 100%;
     margin-top: -100px;
-    z-index: 10;
+    z-index: 1000;
   }
   .win-text{
     font-size: 25px;
@@ -1075,7 +1075,7 @@ video {
 }
 
 .quiz-image-question{
-  width: 50%;
+  width: 100%;
 }
 
 .quiz-image-math{
@@ -1093,12 +1093,31 @@ video {
   }
 }
 
+.quiz-math-desktop{
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  bottom: 0;
+  label{
+    color: white;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    font-size: 50px;
+  }
+}
+
 .select-quiz{
   background-color: #ce7243;
   border: 1px solid #000;
 }
 
 .quiz-image-mobile{
+  display: none;
+  input{
+    height: 100px;
+  }
+}
+.quiz-math-mobile{
   display: none;
   label{
     color: white;
@@ -1216,7 +1235,7 @@ video {
     padding: 40px 40px 200px 40px;
   }
   .quiz-image-question{
-    width: 25%;
+    width: 50%;
   }
   .quiz-image-math{
     width: 50%;
@@ -1229,6 +1248,16 @@ video {
     }
   }
   .quiz-image-mobile{
+    display: block;
+  }
+  .quiz-math-desktop{
+    display: none;
+    label{
+      color: white;
+      font-size: 30px;
+    }
+  }
+  .quiz-math-mobile{
     display: block;
   }
   .result:after{

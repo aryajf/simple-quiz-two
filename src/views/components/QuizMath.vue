@@ -24,7 +24,7 @@
                             </div>
                             <p class="bg-main p-2 text-center mt-3 font-bold">{{questions[idx]['question']}}</p>
                             <div class="row">
-                                <div class="col-6 quiz-image-mobile" v-for="(answer, index) in questions[idx].answers"
+                                <div class="col-6 quiz-math-mobile" v-for="(answer, index) in questions[idx].answers"
                                     :key="index"
                                     :for="index">
                                     <label
@@ -54,8 +54,8 @@
                                         <div v-if="correctAnswers == 4">Selamat kamu mendapatkan 4 tepung</div>
                                         <div v-else>Sayang sekali, kamu hanya mendapatkan {{ correctAnswers }} tepung</div>
                                         <div class="row d-flex justify-content-center mt-3">
-                                            <div v-for="i in correctAnswers" v-bind:key="i" class="col">
-                                                <img class="w-100" src="@/assets/images/unknown.png" alt="">
+                                            <div v-for="i in correctAnswers" v-bind:key="i" class="col-3">
+                                                <img class="w-100" src="@/assets/images/tepung.png" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -76,13 +76,13 @@
                     </div>
                 </div>
                 </div>
-                <div v-if="idx < count" class="quiz-image-desktop container-fluid">
+                <div v-if="idx < count" class="quiz-math-desktop container-fluid">
                     <div class="row">
                         <div class="col-3 select-quiz" v-for="(answer, index) in questions[idx].answers"
                             :key="index"
                             :for="index">
                             <label
-                            class="block font-bold mt-4 rounded-lg py-4 px-6 text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
+                            class="block font-bold mt-4 rounded-lg text-lg d-flex justify-content-center" :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
                             >
                                 <input
                                 :id="index"
