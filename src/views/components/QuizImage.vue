@@ -1,14 +1,13 @@
 <template>
     <div>
-        <audio id="wow">
-            <source src="@/assets/audios/wow.mp3" type="audio/mpeg">
+        <audio id="yay">
+            <source src="@/assets/audios/yay.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
         <audio id="dissapointed">
             <source src="@/assets/audios/dissapointed.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-        <!-- <img src="@/assets/images/confetti.png" v-if="finish" class="background-win" alt="" srcset=""> -->
         <div id="app" class="w-full h-100">
             <div class="flex justify-center items-center">
                 <div class="w-full max-w-xl p-3" style="z-index:2 !important;">
@@ -38,7 +37,7 @@
                                         @change="answered($event)"
                                         :disabled="selectedAnswer != ''"
                                         />
-                                        <img class="w-75" :src="answer" alt="" srcset="">
+                                        <img class="w-100" :src="answer" alt="" srcset="">
                                     </label>
                                 </div>
                             </div>
@@ -51,7 +50,7 @@
                                 <div class="col-md-6 order-md-first">
                                     <div
                                     class="result font-bold text-center rounded p-3 text-lg">
-                                        <div v-if="correctAnswers == 5">Selamat kamu mendapatkan 5 tepung</div>
+                                        <div v-if="correctAnswers == 3">Selamat kamu mendapatkan 3 tepung</div>
                                         <div v-else>Sayang sekali, kamu hanya mendapatkan {{ correctAnswers }} tepung</div>
                                         <div class="row d-flex justify-content-center mt-3">
                                             <div v-for="i in correctAnswers" v-bind:key="i" class="col-4 mb-2">
@@ -64,9 +63,9 @@
                             <div class="col-12 d-flex justify-content-center">
                                 <button
                                 @click="resetQuiz"
-                                class="reset-button w-75 block mt-4 font-bold text-center rounded-lg py-3 px-6 text-lg" :class="{'bg-green-600' : correctAnswers == 5}, {'bg-red-600' : correctAnswers < 5}"
+                                class="reset-button w-75 block mt-4 font-bold text-center rounded-lg py-3 px-6 text-lg" :class="{'bg-green-600' : correctAnswers == 3}, {'bg-red-600' : correctAnswers < 3}"
                                 >
-                                    <template v-if="correctAnswers == 5">
+                                    <template v-if="correctAnswers == 3">
                                         FINISH
                                     </template>
                                     <template v-else>
@@ -94,7 +93,7 @@
                                 @change="answered($event)"
                                 :disabled="selectedAnswer != ''"
                                 />
-                                <img class="w-75" :src="answer" alt="" srcset="">
+                                <img class="w-50" :src="answer" alt="" srcset="">
                             </label>
                         </div>
                     </div>
@@ -111,31 +110,10 @@
             selectedAnswer: "",
             correctAnswers: 0,
             wrongAnswers: 0,
-            count: 5,
+            count: 3,
             timer: 100,
             finish: false,
             questions: [
-            {
-                type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/1-1.png', import.meta.url).href,
-                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/5.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/6.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/1-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/7.png', import.meta.url).href },
-                correctAnswer: "c",
-            },
-            {
-                type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/2-2.png', import.meta.url).href,
-                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/8.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/9.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/10.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/2-1.png', import.meta.url).href },
-                correctAnswer: "d",
-            },
-            {
-                type: "image-text",
-                questionImage: new URL('../../assets/images/image-quiz/3-1.png', import.meta.url).href,
-                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/2-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/3-2.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/11.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/12.png', import.meta.url).href },
-                correctAnswer: "b",
-            },
             {
                 type: "image-text",
                 questionImage: new URL('../../assets/images/image-quiz/4-2.png', import.meta.url).href,
@@ -147,15 +125,22 @@
                 type: "image-text",
                 questionImage: new URL('../../assets/images/image-quiz/2-1.png', import.meta.url).href,
                 question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
-                answers: { a: new URL('../../assets/images/image-quiz/14.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/2-2.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/3-1.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/6.png', import.meta.url).href },
-                correctAnswer: "b",
+                answers: { a: new URL('../../assets/images/image-quiz/14.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/3-1.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/6.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/2-2.png', import.meta.url).href },
+                correctAnswer: "d",
+            },
+            {
+                type: "image-text",
+                questionImage: new URL('../../assets/images/image-quiz/3-1.png', import.meta.url).href,
+                question: 'Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?',
+                answers: { a: new URL('../../assets/images/image-quiz/2-1.png', import.meta.url).href, b: new URL('../../assets/images/image-quiz/11.png', import.meta.url).href, c: new URL('../../assets/images/image-quiz/3-2.png', import.meta.url).href, d: new URL('../../assets/images/image-quiz/12.png', import.meta.url).href },
+                correctAnswer: "c",
             },
             ],
         }
         },
         computed: {
             charStatus(){
-                return this.correctAnswers < 5 ? new URL('../../assets/images/characters/defeated.png', import.meta.url).href : new URL('../../assets/images/characters/win.png', import.meta.url).href
+                return this.correctAnswers < 3 ? new URL('../../assets/images/characters/defeated.png', import.meta.url).href : new URL('../../assets/images/characters/win.png', import.meta.url).href
             },
         },
         mounted(){
@@ -198,16 +183,16 @@
             if(this.idx == this.count){
                 window.clearInterval(window.timer)
                 this.finish = true
-                if(this.correctAnswers < 5){
+                if(this.correctAnswers < 3){
                     document.getElementById("dissapointed").play()
                 }else{
-                    document.getElementById("wow").play()
+                    document.getElementById("yay").play()
                 }
             }
         },
         resetQuiz() {
             let status = false
-            if(this.correctAnswers >= 5){
+            if(this.correctAnswers >= 3){
                 status = true
             }
             this.$store.dispatch('restartGame',{type:'image', status})

@@ -58,11 +58,11 @@ body {
 }
 
 .fade-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .fade-leave-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .fade-enter-from,
@@ -72,6 +72,11 @@ body {
 
 #app{
   background-color: #fff3e3;
+  background: url('@/assets/images/background.png');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   height: 100vh;
 }
 
@@ -810,12 +815,13 @@ video {
 
 .background{
   height: 100vh;
-  object-fit: cover;
   width: 100%;
   position: fixed;
 }
 .background-win{
   height: 100vh;
+  background-color: #fff3e3;
+  z-index: 0;
   object-fit: cover;
   width: 100%;
   position: fixed;
@@ -1091,6 +1097,9 @@ video {
     color: white;
     font-size: 40px;
   }
+  label.corrected{
+    color: #72ceb1 !important;
+  }
 }
 
 .quiz-math-desktop{
@@ -1103,6 +1112,9 @@ video {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
     font-size: 50px;
+  }
+  label.corrected{
+    color: #72ceb1 !important;
   }
 }
 
@@ -1123,9 +1135,17 @@ video {
     color: white;
     font-size: 30px;
   }
+  label.corrected{
+    color: #72ceb1 !important;
+  }
   input{
     height: 100px;
   }
+}
+
+.tutorial-header{
+  font-size: 30px;
+  // margin: 3rem 0 0 4rem;
 }
 
 @-webkit-keyframes spin {
@@ -1195,6 +1215,9 @@ video {
 }
 
 @media (max-width: 768px) {
+  #app{
+    background-position: top;
+  }
   .select-quiz{
     background-color: #ce7243;
     border: 0 solid transparent;
@@ -1246,6 +1269,9 @@ video {
       color: white;
       font-size: 30px;
     }
+    label.corrected{
+      color: #72ceb1 !important;
+    }
   }
   .quiz-image-mobile{
     display: block;
@@ -1255,6 +1281,9 @@ video {
     label{
       color: white;
       font-size: 30px;
+    }
+    label.corrected{
+      color: #72ceb1 !important;
     }
   }
   .quiz-math-mobile{

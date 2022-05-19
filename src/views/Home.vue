@@ -1,15 +1,14 @@
 <template>
   <div id="home">
-    <img src="@/assets/images/dinding.png" class="background" alt="" srcset="">
+    <audio loop autoplay id="music" hidden>
+        <source src="@/assets/audios/music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <splash-screen v-if="gameStatus == 'start'" />
     <selecting-game v-if="gameStatus == 'selecting'" />
-    <Transition name="fade">
       <quiz-image v-if="gameStatus == 'onGame' && selectedGame == 'image'" />
-    </Transition>
-    <Transition name="fade">
       <quiz-math v-if="gameStatus == 'onGame' && selectedGame == 'math'" />
-    </Transition>
-    <win v-if="gameStatus == 'win'" />
+      <win v-if="gameStatus == 'win'" />
   </div>
 </template>
 

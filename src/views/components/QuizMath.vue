@@ -1,14 +1,13 @@
 <template>
     <div>
-        <audio id="wow">
-            <source src="@/assets/audios/wow.mp3" type="audio/mpeg">
+        <audio id="yay">
+            <source src="@/assets/audios/yay.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
         <audio id="dissapointed">
             <source src="@/assets/audios/dissapointed.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-        <!-- <img src="@/assets/images/confetti.png" v-if="finish" class="background-win" alt="" srcset=""> -->
         <div id="app" class="w-full h-100">
             <div class="flex justify-center items-center">
                 <div class="w-full max-w-xl p-3" style="z-index:2 !important;">
@@ -51,7 +50,7 @@
                                 <div class="col-md-6 order-md-first">
                                     <div
                                     class="result font-bold text-center rounded p-3 text-lg">
-                                        <div v-if="correctAnswers == 4">Selamat kamu mendapatkan 4 tepung</div>
+                                        <div v-if="correctAnswers == 3">Selamat kamu mendapatkan 3 tepung</div>
                                         <div v-else>Sayang sekali, kamu hanya mendapatkan {{ correctAnswers }} tepung</div>
                                         <div class="row d-flex justify-content-center mt-3">
                                             <div v-for="i in correctAnswers" v-bind:key="i" class="col-3">
@@ -62,9 +61,9 @@
                                 </div>
                                 <button
                                 @click="resetQuiz"
-                                class="reset-button w-75 block mt-4 font-bold text-center rounded-lg py-3 px-6 text-lg" :class="{'bg-green-600' : correctAnswers == 4}, {'bg-red-600' : correctAnswers < 4}"
+                                class="reset-button w-75 block mt-4 font-bold text-center rounded-lg py-3 px-6 text-lg" :class="{'bg-green-600' : correctAnswers == 3}, {'bg-red-600' : correctAnswers < 3}"
                                 >
-                                <template v-if="correctAnswers == 4">
+                                <template v-if="correctAnswers == 3">
                                     FINISH
                                 </template>
                                 <template v-else>
@@ -109,17 +108,10 @@
             selectedAnswer: "",
             correctAnswers: 0,
             wrongAnswers: 0,
-            count: 4,
+            count: 3,
             timer: 100,
             finish: false,
             questions: [
-            {
-                type: "image-text",
-                questionImage: new URL('../../assets/images/math-quiz/cake.png', import.meta.url).href,
-                question: 'Berapa total kue diatas ?',
-                answers: { a: 3, b: 5, c: 1, d: 2 },
-                correctAnswer: "a",
-            },
             {
                 type: "image-text",
                 questionImage: new URL('../../assets/images/math-quiz/cupcake.png', import.meta.url).href,
@@ -146,7 +138,7 @@
         },
         computed: {
             charStatus(){
-                return this.correctAnswers < 4 ? new URL('../../assets/images/characters/defeated.png', import.meta.url).href : new URL('../../assets/images/characters/win.png', import.meta.url).href
+                return this.correctAnswers < 3 ? new URL('../../assets/images/characters/defeated.png', import.meta.url).href : new URL('../../assets/images/characters/win.png', import.meta.url).href
             },
         },
         mounted(){
@@ -189,16 +181,16 @@
             if(this.idx == this.count){
                 window.clearInterval(window.timer)
                 this.finish = true
-                if(this.correctAnswers < 4){
+                if(this.correctAnswers < 3){
                     document.getElementById("dissapointed").play()
                 }else{
-                    document.getElementById("wow").play()
+                    document.getElementById("yay").play()
                 }
             }
         },
         resetQuiz() {
             let status = false
-            if(this.correctAnswers >= 4){
+            if(this.correctAnswers >= 3){
                 status = true
             }
             this.$store.dispatch('restartGame',{type:'math', status})

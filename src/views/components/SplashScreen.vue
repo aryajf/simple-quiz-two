@@ -4,7 +4,7 @@
         <img src="@/assets/images/pot-atas.png" class="pot-top-right" alt="" srcset="">
         <img src="@/assets/images/pot-bawah.png" class="pot-bottom-left" alt="" srcset="">
         <img src="@/assets/images/pot-bawah.png" class="pot-bottom-right" alt="" srcset="">
-        <div class="bg-main-2 splash-screen-box container rounded-lg m-auto p-3">
+        <div class="splash-screen-box container rounded-lg m-auto p-3">
             <div class="splash-screen-container container text-center" v-if="menu == 'start'">
                 <div class="mb-3 start-button-container">
                     <span class="start-button rounded-3 font-bold" @click="menu = 'introduction-1'">MULAI</span>

@@ -1,7 +1,11 @@
 <template>
     <div class="win flex h-screen">
+        <audio id="tring">
+            <source src="@/assets/audios/tring.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
         <img src="@/assets/images/confetti.png" class="background-win" alt="" srcset="">
-        <div class="bg-main-2 win-box container rounded-lg m-auto p-3">
+        <div class="win-box container rounded-lg m-auto p-3">
             <div class="win-container container d-flex justify-content-center text-center">
                 <div class="col-md-6">
                     <img src="@/assets/images/finish.png" class="win-image" alt="" srcset="">
@@ -33,6 +37,10 @@ export default{
 import { ref, computed, onMounted, watch } from "vue";
 import store from "@/store";
 const gameStatus = computed(() => store.getters["gameStatus"]);
+
+onMounted(() => {
+    document.getElementById("tring").play()
+})
 
 const finishGame = () => {
     store.dispatch("finishGame")
