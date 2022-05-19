@@ -140,7 +140,8 @@
                         </div>
                         <p class="bg-main p-2 text-center mt-3 font-bold">Manakah dari gambar dibawah ini yang cocok untuk melengkapi gambar diatas?</p>
                         <div class="row">
-                            <div class="col-6 quiz-image-mobile" v-for="(answer, index) in tutorialImages" :key="index">
+                            <div class="col-6 quiz-image-mobile" v-for="(answer, index) in tutorialImages" :key="index" style="position:relative">
+                                <img class="w-50" style="position:absolute;top: 0;right:0;" v-if="index == correctedAnswer" src="@/assets/images/check.png" alt="" srcset="">
                                 <label
                                 class="select-quiz block mt-4 rounded-full p-6 text-lg d-flex justify-content-center"
                                 >
@@ -155,7 +156,8 @@
                 </div>
                 <div class="quiz-image-desktop container-fluid">
                     <div class="row">
-                        <div class="col-3 select-quiz" v-for="(answer, index) in tutorialImages" :key="index">
+                        <div class="col-3 select-quiz" v-for="(answer, index) in tutorialImages" :key="index" style="position:relative">
+                            <img class="w-50" style="position:absolute;top: 0;right:0;" v-if="index == correctedAnswer" src="@/assets/images/check.png" alt="" srcset="">
                             <label
                             class="block rounded-lg text-lg d-flex justify-content-center">
                                 <input
@@ -176,6 +178,7 @@ export default{
     data(){
         return{
             menu: 'selecting',
+            correctedAnswer: 'c',
             tutorialImages: {
                 a: new URL('../../assets/images/image-quiz/5.png', import.meta.url).href,
                 b: new URL('../../assets/images/image-quiz/6.png', import.meta.url).href,

@@ -1,5 +1,9 @@
 <template>
     <div class="win flex h-screen">
+        <audio id="yay">
+            <source src="@/assets/audios/yay.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
         <audio id="tring">
             <source src="@/assets/audios/tring.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
@@ -39,6 +43,7 @@ import store from "@/store";
 const gameStatus = computed(() => store.getters["gameStatus"]);
 
 onMounted(() => {
+    document.getElementById("yay").play()
     document.getElementById("tring").play()
 })
 

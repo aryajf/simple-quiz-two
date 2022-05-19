@@ -1,7 +1,7 @@
 <template>
     <div>
-        <audio id="yay">
-            <source src="@/assets/audios/yay.mp3" type="audio/mpeg">
+        <audio id="win">
+            <source src="@/assets/audios/win.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
         <audio id="dissapointed">
@@ -186,7 +186,7 @@
                 if(this.correctAnswers < 3){
                     document.getElementById("dissapointed").play()
                 }else{
-                    document.getElementById("yay").play()
+                    document.getElementById("win").play()
                 }
             }
         },
